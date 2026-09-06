@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wyatt Robertson — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #F1F0EB;
+    --ink: #181D27;
+    --ink-soft: #565C68;
+    --line: #D8D5C9;
+    --accent: #2F5D50;
+    --accent-warm: #B4863C;
+    --paper: #FFFFFF;
+    --max: 760px;
+  }
+
+  *{ box-sizing: border-box; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, .display{
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+
+  a{ color: var(--accent); text-decoration: none; }
+  a:hover{ text-decoration: underline; }
+  a:focus-visible, button:focus-visible{
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  .wrap{
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---------- Nav ---------- */
+  nav{
+    position: sticky;
+    top: 0;
+    background: rgba(241,240,235,0.92);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+    z-index: 10;
+  }
+  nav .wrap{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+  }
+  nav .brand{
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+  }
+  nav ul{
+    list-style: none;
+    display: flex;
+    gap: 24px;
+    margin: 0;
+    padding: 0;
+  }
+  nav a{
+    color: var(--ink);
+    font-size: 0.92rem;
+  }
+  nav a:hover{ color: var(--accent); }
+
+  .nav-toggle{
+    display: none;
+    background: none;
+    border: none;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.92rem;
+    color: var(--ink);
+    cursor: pointer;
+    padding: 8px 0;
+  }
+
+  /* ---------- Sections ---------- */
+  section{
+    padding: 64px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  section:last-of-type{ border-bottom: none; }
+
+  .eyebrow{
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+  }
+
+  /* ---------- Hero ---------- */
+  #hero{
+    padding-top: 88px;
+    padding-bottom: 80px;
+  }
+  #hero h1{
+    font-size: clamp(2.4rem, 6vw, 3.6rem);
+    line-height: 1.05;
+    opacity: 0;
+    animation: rise 0.7s ease-out forwards;
+  }
+  #hero .role{
+    font-size: 1.15rem;
+    color: var(--accent);
+    margin-top: 12px;
+    opacity: 0;
+    animation: rise 0.7s ease-out 0.12s forwards;
+  }
+  #hero .school{
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    margin-top: 4px;
+    opacity: 0;
+    animation: rise 0.7s ease-out 0.2s forwards;
+  }
+  @keyframes rise{
+    from{ opacity: 0; transform: translateY(10px); }
+    to{ opacity: 1; transform: translateY(0); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    #hero h1, #hero .role, #hero .school{
+      animation: none; opacity: 1;
+    }
+  }
+
+  /* ---------- About ---------- */
+  #about .grid{
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 32px;
+  }
+  #about p{ max-width: 62ch; color: var(--ink-soft); }
+  #about p strong{ color: var(--ink); font-weight: 600; }
+
+  /* ---------- Skills ---------- */
+  .skill-list{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    margin-top: 8px;
+  }
+  .skill-list span{
+    padding: 6px 18px 6px 0;
+    margin-right: 18px;
+    border-right: 1px solid var(--line);
+    font-size: 0.98rem;
+  }
+  .skill-list span:last-child{ border-right: none; }
+
+  /* ---------- Projects ---------- */
+  table{
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+  }
+  th{
+    text-align: left;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    padding: 10px 16px 10px 0;
+    border-bottom: 2px solid var(--ink);
+  }
+  td{
+    padding: 16px 16px 16px 0;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  td.proj-name{
+    font-weight: 600;
+    white-space: nowrap;
+    color: var(--accent);
+  }
+  tr:last-child td{ border-bottom: none; }
+
+  /* ---------- Resume ---------- */
+  .btn{
+    display: inline-block;
+    padding: 12px 26px;
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 3px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.95rem;
+    margin-top: 12px;
+  }
+  .btn:hover{
+    background: var(--accent);
+    text-decoration: none;
+  }
+  .btn.soon{
+    background: transparent;
+    color: var(--ink-soft);
+    border: 1px solid var(--line);
+  }
+  .btn.soon:hover{ background: transparent; color: var(--ink-soft); }
+
+  /* ---------- Contact / Footer ---------- */
+  footer{
+    padding: 48px 0 64px;
+  }
+  .contact-list{
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+  }
+  .contact-list a{ color: var(--ink); font-weight: 500; }
+  .contact-list a:hover{ color: var(--accent); }
+  footer .fine{
+    margin-top: 40px;
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+  }
+
+  /* ---------- Mobile ---------- */
+  @media (max-width: 640px){
+    nav ul{
+      display: none;
+      position: absolute;
+      top: 60px;
+      left: 0;
+      right: 0;
+      background: var(--bg);
+      border-bottom: 1px solid var(--line);
+      flex-direction: column;
+      gap: 0;
+      padding: 8px 24px 16px;
+    }
+    nav ul.open{ display: flex; }
+    nav ul li{ padding: 10px 0; border-bottom: 1px solid var(--line); }
+    nav ul li:last-child{ border-bottom: none; }
+    .nav-toggle{ display: block; }
+
+    #about .grid{ grid-template-columns: 1fr; gap: 8px; }
+
+    table, thead, tbody, th, td, tr{ display: block; }
+    thead{ display: none; }
+    tr{ padding: 16px 0; border-bottom: 1px solid var(--line); }
+    td{ border-bottom: none; padding: 4px 0; }
+    td.proj-name{ font-size: 1.05rem; }
+    td.proj-desc::before{
+      content: "";
+    }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">Wyatt Robertson</div>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links" id="navToggle">Menu</button>
+    <ul id="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#resume">Resume</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header id="hero">
+  <div class="wrap">
+    <h1>Wyatt Robertson</h1>
+    <p class="role">Finance &amp; Mechanical Engineering Student</p>
+    <p class="school">University of Utah, David Eccles School of Business</p>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="grid">
+      <div class="eyebrow">About</div>
+      <p>
+        I'm a double major in <strong>Finance</strong> and <strong>Mechanical Engineering</strong> at the
+        David Eccles School of Business, University of Utah. That combination pulls me toward problems that
+        sit between business and hands-on building — market research, strategy, and product development. I've
+        founded and run my own small businesses, interned in fundraising and real estate, and I'm increasingly
+        interested in how <strong>artificial intelligence</strong> can speed up research and decision-making.
+        I like taking a problem apart, finding the data that matters, and turning it into a clear plan.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="eyebrow">Skills</div>
+    <div class="skill-list">
+      <span>Market Research</span>
+      <span>Data Analysis (Excel)</span>
+      <span>Client Communication</span>
+      <span>Strategic Planning</span>
+      <span>Leadership</span>
+      <span>HTML &amp; CSS</span>
+      <span>Git &amp; GitHub</span>
+      <span>AI Prompt Engineering</span>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="eyebrow">Projects</div>
+    <table>
+      <thead>
+        <tr><th>Project</th><th>Description</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="proj-name">MukWash</td>
+          <td class="proj-desc">Founded and operated a power-washing business, handling branding, market research, and service delivery. Digital and local marketing increased client inquiries by 40% in the first month. <em>[link coming soon]</em></td>
+        </tr>
+        <tr>
+          <td class="proj-name">[Product Business Name]</td>
+          <td class="proj-desc">[One or two sentences on the product, who it's for, and what you handled — sourcing, branding, sales, etc.] <em>[link coming soon]</em></td>
+        </tr>
+        <tr>
+          <td class="proj-name">Make Salt Lake</td>
+          <td class="proj-desc">Conducted data-driven research to identify fundraising opportunities and built tracking tools that improved donor outreach and event participation. <em>[link coming soon]</em></td>
+        </tr>
+        <tr>
+          <td class="proj-name">Windermere Real Estate</td>
+          <td class="proj-desc">Supported agents with market research and marketing materials that improved property visibility and client engagement. <em>[link coming soon]</em></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="resume">
+  <div class="wrap">
+    <div class="eyebrow">Resume</div>
+    <p>Take a look at my latest resume for a full summary of my experience and education.</p>
+    <!-- If you have a PDF resume, upload it to your repo (e.g. resume.pdf) and use the link below. -->
+    <a class="btn" href="resume.pdf">Download Resume (PDF)</a>
+    <!-- If you don't have one yet, delete the line above and use this instead: -->
+    <!-- <span class="btn soon">Resume coming soon</span> -->
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="eyebrow">Contact</div>
+    <div class="contact-list">
+      <a href="mailto:wyattbbs9@gmail.com">wyattbbs9@gmail.com</a>
+      <a href="https://www.linkedin.com/in/wyatt-robertson-[confirm-handle]" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/[your-username]" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <p class="fine">© <span id="year"></span> Wyatt Robertson. Built with HTML &amp; CSS, published on GitHub Pages.</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const toggle = document.getElementById('navToggle');
+  const links = document.getElementById('nav-links');
+  toggle.addEventListener('click', () => {
+    const isOpen = links.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', isOpen);
+  });
+  links.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      links.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>
+
+</body>
+</html>
